@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Agenda de contatos</title>
+</head>
+<body>
+	<h1>Criar novo contato</h1>
+	<form name="frmContac"></form>
+</body>
+</html>

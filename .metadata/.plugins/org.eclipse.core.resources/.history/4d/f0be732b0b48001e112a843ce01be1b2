@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Agenda de contatos</title>
+</head>
+<body>
+	<h1>Criar novo contato</h1>
+	<form name="frmContact" action="">
+		<table>
+			<tr>
+				<td><input type="text" name="name" placeholder="Nome" class="box1"></td>
+			</tr>
+			<tr>
+				<td><input type="text" name="fone" placeholder="Telefone" class="box2"></td>
+			</tr>
+			<tr>
+				<td><input type="text" name="email" placeholder="E-mail" class="box1"></td>
+			</tr>
+		</table>
+		
+		<input type="button"  value="Adicionar" class="button1">
+	</form>
+</body>
+</html>

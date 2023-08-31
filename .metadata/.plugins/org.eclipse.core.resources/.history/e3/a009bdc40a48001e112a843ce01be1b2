@@ -1,0 +1,8 @@
+/**
+ * Validar formulário
+ */
+
+ function valdator() {
+	 let nome = frmContact.nome.value;
+	 let fone = frmContact.fone.value;
+ }
