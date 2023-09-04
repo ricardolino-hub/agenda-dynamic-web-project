@@ -2,10 +2,10 @@
  * Validar formulário
  */
 
- function valdator() {
-	 let nome = frmContact.nome.value;
-	 let fone = frmContact.fone.value;
-	 
+ function validator() {
+	 let nome = frmContact.name.value
+	 let fone = frmContact.fone.value
+
 	 if (nome === "") {
 		alert('Preencha o campo nome')
 		frmContact.nome.focus()
@@ -15,6 +15,6 @@
 		frmContact.fone.focus()
 		return false
 	 } else {
-		 document.form["frmContact"].submit()
+		 document.getElementById("frmContact").submit();
 	 }
  }

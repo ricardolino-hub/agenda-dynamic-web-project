@@ -2,7 +2,7 @@ package model;
 
 public class JavaBeans {
 	private String idcon;
-	private String nome;
+	private String name;
 	private String fone;
 	private String email;
 	
@@ -11,10 +11,10 @@ public class JavaBeans {
 		// TODO Auto-generated constructor stub
 	}
 
-	public JavaBeans(String idcon, String nome, String fone, String email) {
+	public JavaBeans(String idcon, String name, String fone, String email) {
 		super();
 		this.idcon = idcon;
-		this.nome = nome;
+		this.name = name;
 		this.fone = fone;
 		this.email = email;
 	}
@@ -27,12 +27,12 @@ public class JavaBeans {
 		this.idcon = idcon;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getName() {
+		return name;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setName(String nome) {
+		this.name = nome;
 	}
 
 	public String getFone() {
