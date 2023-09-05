@@ -2,6 +2,7 @@ package model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 
 public class DAO {
 	//Parametros de conexão
@@ -33,4 +34,29 @@ public class DAO {
 //			System.out.println(e);
 //		}
 //	}
+	
+	// Create
+	public void insertContact(JavaBeans contact) {
+		String create = "insert into contatos (nome, fone, email) values (?,?,?)";
+		
+		try {
+			//Abrir conexão
+			Connection con = connect();
+			
+			// Preparar query
+			PreparedStatement pst = con.prepareStatement(create);
+			
+			pst.setString(1, contact.getName());
+			pst.setString(2, contact.getFone());
+			pst.setString(3, contact.getEmail());
+			
+			//Executar query
+			pst.executeUpdate();
+			
+			//Fechar conexão
+			con.close();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+	}
 }

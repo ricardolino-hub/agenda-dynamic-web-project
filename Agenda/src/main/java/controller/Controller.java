@@ -11,7 +11,7 @@ import model.DAO;
 import model.JavaBeans;
 
 
-@WebServlet(urlPatterns = {"/Controller", "/main", "/insert"})
+@WebServlet(urlPatterns = {"/Controller", "/main", "/insert", "/new"})
 public class Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
@@ -29,6 +29,8 @@ public class Controller extends HttpServlet {
 			contacts(request, response);
 		}else if (action.equals("/insert")) {
 			newContact(request, response);
+		}else if (action.equals("/new")) {
+			newContactView(request,response);
 		}else {
 			response.sendRedirect("index.html");
 		}
@@ -38,9 +40,17 @@ public class Controller extends HttpServlet {
 		response.sendRedirect("agenda.jsp");
 	}
 	
+	protected void newContactView(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.sendRedirect("novo.html");
+	}
+	
 	protected void newContact(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		contact.setName(request.getParameter("name"));
 		contact.setFone(request.getParameter("fone"));
 		contact.setEmail(request.getParameter("email"));
+		
+		dao.insertContact(contact);
+		
+		response.sendRedirect("main");
 	}
 }
