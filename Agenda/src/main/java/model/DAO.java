@@ -3,6 +3,8 @@ package model;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 
 public class DAO {
 	//Parametros de conexão
@@ -40,7 +42,7 @@ public class DAO {
 		String create = "insert into contatos (nome, fone, email) values (?,?,?)";
 		
 		try {
-			//Abrir conexão
+			// Abrir conexão
 			Connection con = connect();
 			
 			// Preparar query
@@ -57,6 +59,36 @@ public class DAO {
 			con.close();
 		} catch (Exception e) {
 			System.out.println(e);
+		}
+	}
+	
+	public ArrayList<JavaBeans> listContacts() {
+		String read = "select * from contatos";
+		
+		ArrayList<JavaBeans> contacts = new ArrayList<>();
+		
+		try {
+			// Abrir conexão
+			Connection con = connect();
+			
+			// Preparar query
+			PreparedStatement pst = con.prepareStatement(read);
+			
+			// Recebendo resultados do banco
+			ResultSet rs = pst.executeQuery();
+			
+			// Transformando ResultSet em JavaBeans
+			while (rs.next()) {
+				contacts.add(new JavaBeans(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4)));
+			}
+			
+			// Fechar conexão
+			con.close();
+			
+			return contacts;
+		} catch (Exception e) {
+			System.out.println(e);
+			return null;
 		}
 	}
 }

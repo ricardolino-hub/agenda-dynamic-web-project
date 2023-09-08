@@ -1,5 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@ page import="model.JavaBeans"%>
+<%@ page import="java.util.ArrayList"%>
+<%
+ArrayList<JavaBeans> contacts = (ArrayList<JavaBeans>) request.getAttribute("contacts");
+//for (JavaBeans contact : contacts) {
+//	out.println(contact.getName());
+//}
+%>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -11,5 +19,25 @@
 <body>
 	<h1>Agenda de contatos</h1>
 	<a href="new" class="button1">Novo contato</a>
+	<table id="table">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Nome</th>
+				<th>Fone</th>
+				<th>E-mail</th>
+			</tr>
+		</thead>
+		<tbody>
+			<%for (JavaBeans contact : contacts) {%>
+			<tr>
+				<td><%=contact.getIdcon()%></td>
+				<td><%=contact.getName()%></td>
+				<td><%=contact.getFone()%></td>
+				<td><%=contact.getEmail()%></td>
+			</tr>
+			<%} %>
+		</tbody>
+	</table>
 </body>
 </html>
