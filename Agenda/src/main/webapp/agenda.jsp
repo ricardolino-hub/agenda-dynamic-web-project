@@ -26,6 +26,7 @@ ArrayList<JavaBeans> contacts = (ArrayList<JavaBeans>) request.getAttribute("con
 				<th>Nome</th>
 				<th>Fone</th>
 				<th>E-mail</th>
+				<th>Opções</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -35,6 +36,7 @@ ArrayList<JavaBeans> contacts = (ArrayList<JavaBeans>) request.getAttribute("con
 				<td><%=contact.getName()%></td>
 				<td><%=contact.getFone()%></td>
 				<td><%=contact.getEmail()%></td>
+				<td><a href="find?idcon=<%=contact.getIdcon()%>" class="button1">Editar</a></td>
 			</tr>
 			<%} %>
 		</tbody>

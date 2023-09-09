@@ -14,7 +14,7 @@ import model.DAO;
 import model.JavaBeans;
 
 
-@WebServlet(urlPatterns = {"/Controller", "/main", "/insert", "/new"})
+@WebServlet(urlPatterns = {"/Controller", "/main", "/insert", "/new", "/find", "/update"})
 public class Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
@@ -34,6 +34,10 @@ public class Controller extends HttpServlet {
 			newContact(request, response);
 		}else if (action.equals("/new")) {
 			newContactView(request,response);
+		}else if (action.equals("/find")) {
+			findContact(request,response);
+		}else if (action.equals("/update")) {
+			updateContact(request,response);
 		}else {
 			response.sendRedirect("index.html");
 		}
@@ -58,11 +62,46 @@ public class Controller extends HttpServlet {
 	}
 	
 	protected void newContact(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//Recebendo dados da view
 		contact.setName(request.getParameter("name"));
 		contact.setFone(request.getParameter("fone"));
 		contact.setEmail(request.getParameter("email"));
 		
+		// Enviar para a classe dao
 		dao.insertContact(contact);
+		
+		response.sendRedirect("main");
+	}
+	
+	protected void findContact(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// Recebendo id da view
+		String idcon = request.getParameter("idcon");
+		
+		// Setar a JavaBeans
+		contact.setIdcon(idcon);
+		
+		// Enviar para a classe dao
+		dao.find(contact);
+		
+		// Encaminhar dados para view
+		request.setAttribute("idcon", contact.getIdcon());
+		request.setAttribute("name", contact.getName());
+		request.setAttribute("fone", contact.getFone());
+		request.setAttribute("email", contact.getEmail());
+		
+		RequestDispatcher rd = request.getRequestDispatcher("editar.jsp");
+		rd.forward(request, response);
+	}
+	
+	protected void updateContact(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// Setar JavaBeans
+		contact.setIdcon(request.getParameter("idcon"));
+		contact.setName(request.getParameter("name"));
+		contact.setFone(request.getParameter("fone"));
+		contact.setEmail(request.getParameter("email"));
+		
+		// Enviar para a classe dao
+		dao.update(contact);
 		
 		response.sendRedirect("main");
 	}
