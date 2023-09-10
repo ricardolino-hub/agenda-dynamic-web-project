@@ -36,10 +36,15 @@ ArrayList<JavaBeans> contacts = (ArrayList<JavaBeans>) request.getAttribute("con
 				<td><%=contact.getName()%></td>
 				<td><%=contact.getFone()%></td>
 				<td><%=contact.getEmail()%></td>
-				<td><a href="find?idcon=<%=contact.getIdcon()%>" class="button1">Editar</a></td>
+				<td>
+					<a href="find?idcon=<%=contact.getIdcon()%>" class="button1">Editar</a>
+					<a href="javascript: confirmJs(<%=contact.getIdcon()%>)" class="button2">Deletar</a>
+				
+				</td>
 			</tr>
 			<%} %>
 		</tbody>
 	</table>
+	<script src="scripts/confirm.js"></script>
 </body>
 </html>

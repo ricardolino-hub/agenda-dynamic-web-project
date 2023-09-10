@@ -14,7 +14,7 @@ import model.DAO;
 import model.JavaBeans;
 
 
-@WebServlet(urlPatterns = {"/Controller", "/main", "/insert", "/new", "/find", "/update"})
+@WebServlet(urlPatterns = {"/Controller", "/main", "/insert", "/new", "/find", "/update", "/delete"})
 public class Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
@@ -38,11 +38,14 @@ public class Controller extends HttpServlet {
 			findContact(request,response);
 		}else if (action.equals("/update")) {
 			updateContact(request,response);
+		}else if (action.equals("/delete")) {
+			deleteContact(request,response);
 		}else {
 			response.sendRedirect("index.html");
 		}
 	}
 	
+	// List all
 	protected void contacts(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ArrayList<JavaBeans> contacts = dao.listContacts();
 		
@@ -61,6 +64,7 @@ public class Controller extends HttpServlet {
 		response.sendRedirect("novo.html");
 	}
 	
+	// Create
 	protected void newContact(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//Recebendo dados da view
 		contact.setName(request.getParameter("name"));
@@ -73,6 +77,7 @@ public class Controller extends HttpServlet {
 		response.sendRedirect("main");
 	}
 	
+	// Find 1
 	protected void findContact(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// Recebendo id da view
 		String idcon = request.getParameter("idcon");
@@ -93,6 +98,7 @@ public class Controller extends HttpServlet {
 		rd.forward(request, response);
 	}
 	
+	// Update
 	protected void updateContact(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// Setar JavaBeans
 		contact.setIdcon(request.getParameter("idcon"));
@@ -102,6 +108,20 @@ public class Controller extends HttpServlet {
 		
 		// Enviar para a classe dao
 		dao.update(contact);
+		
+		response.sendRedirect("main");
+	}
+	
+	// Delete
+	protected void deleteContact(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// Recebendo id da view
+		String idcon = request.getParameter("idcon");
+		
+		// Setar JavaBeans
+		contact.setIdcon(idcon);
+		
+		// Enviar para a classe dao
+		dao.delete(contact);
 		
 		response.sendRedirect("main");
 	}

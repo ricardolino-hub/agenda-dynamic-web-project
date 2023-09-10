@@ -114,7 +114,7 @@ public class DAO {
 				contact.setFone(rs.getString(3));
 				contact.setEmail(rs.getString(4));
 			}
-			
+
 			// Fechar conexão
 			con.close();
 		} catch (Exception e) {
@@ -137,9 +137,31 @@ public class DAO {
 			pst.setString(3, contact.getEmail());
 			pst.setString(4, contact.getIdcon());
 
-			// Recebendo resultados do banco
+			// Executar no banco
 			pst.executeUpdate();
+
+			// Fechar conexão
+			con.close();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+	}
+
+	// Delete
+	public void delete(JavaBeans contact) {
+		String delete = "delete from contatos where idcon=?";
+
+		try {
+			// Conectar no banco
+			Connection con = connect();
+
+			// Preparar query
+			PreparedStatement pst = con.prepareStatement(delete);
+			pst.setString(1, contact.getIdcon());
 			
+			// Executar no banco
+			pst.executeUpdate();
+
 			// Fechar conexão
 			con.close();
 		} catch (Exception e) {
