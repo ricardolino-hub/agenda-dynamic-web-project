@@ -19,6 +19,7 @@ ArrayList<JavaBeans> contacts = (ArrayList<JavaBeans>) request.getAttribute("con
 <body>
 	<h1>Agenda de contatos</h1>
 	<a href="new" class="button1">Novo contato</a>
+	<a href="report" class="button2">Gerar Relatório</a>
 	<table id="table">
 		<thead>
 			<tr>
